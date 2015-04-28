@@ -8,6 +8,11 @@ def HostedGraphiteReporter(*args, **kwargs):
     return cls(*args, **kwargs)
 
 
+def TxHostedGraphiteReporter(*args, **kwargs):
+    from .tx_hosted_graphite_reporter import TxHostedGraphiteReporter as cls
+    return cls(*args, **kwargs)
+
+
 def CarbonReporter(*args, **kwargs):
     from .carbon_reporter import CarbonReporter as cls
     return cls(*args, **kwargs)
