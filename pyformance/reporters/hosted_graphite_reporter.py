@@ -17,8 +17,8 @@ class HostedGraphiteReporter(Reporter):
     """
 
     def __init__(
-        self, hosted_graphite_api_key, registry=None, reporting_interval=10, url="https://hostedgraphite.com/api/v1/sink",
-            clock=None):
+        self, hosted_graphite_api_key, registry=None, reporting_interval=10,
+            url="https://hostedgraphite.com/api/v1/sink", clock=None):
         super(HostedGraphiteReporter, self).__init__(
             registry, reporting_interval, clock)
         self.url = url
@@ -32,7 +32,7 @@ class HostedGraphiteReporter(Reporter):
                 request = urllib2.Request(self.url, metrics)
                 request.add_header("Authorization", "Basic %s" %
                                    base64.encodestring(self.api_key).strip())
-                result = urllib2.urlopen(request)
+                urllib2.urlopen(request)
             except Exception as e:
                 print(e, file=sys.stderr)
 
