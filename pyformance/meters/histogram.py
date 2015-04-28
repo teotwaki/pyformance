@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import time
 import math
 from threading import Lock

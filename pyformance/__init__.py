@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 __import__('pkg_resources').declare_namespace(__name__)
 
 from .registry import MetricsRegistry, global_registry, set_global_registry

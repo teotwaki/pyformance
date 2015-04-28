@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import time
 from threading import Lock
 from ..stats.moving_average import ExpWeightedMovingAvg

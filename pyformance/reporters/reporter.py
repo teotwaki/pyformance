@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import time
 from threading import Thread, Event
 from ..registry import global_registry, get_qualname

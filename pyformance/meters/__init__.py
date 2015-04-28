@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from .counter import Counter
 from .meter import Meter
 from .histogram import Histogram
