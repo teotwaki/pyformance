@@ -7,9 +7,7 @@ import sys
 import urllib2
 import base64
 
-from .meters import Counter, Histogram, Meter, Timer
-from .registry import MetricsRegistry
-from .reporter import Reporter
+from pyformance.reporters.reporter import Reporter
 
 
 class HostedGraphiteReporter(Reporter):
