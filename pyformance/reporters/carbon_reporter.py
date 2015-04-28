@@ -16,8 +16,8 @@ class CarbonReporter(Reporter):
     """
 
     def __init__(self, registry=None, reporting_interval=5, prefix="",
-                 server=DEFAULT_CARBON_SERVER, port=DEFAULT_CARBON_PORT, socket_factory=socket.socket,
-                 clock=None):
+                 server=DEFAULT_CARBON_SERVER, port=DEFAULT_CARBON_PORT,
+                 socket_factory=socket.socket, clock=None):
         super(CarbonReporter, self).__init__(
             registry, reporting_interval, clock)
         self.prefix = prefix
@@ -28,7 +28,7 @@ class CarbonReporter(Reporter):
     def report_now(self, registry=None, timestamp=None):
         metrics = self._collect_metrics(registry or self.registry, timestamp)
         if metrics:
-            # XXX: keep connection open 
+            # XXX: keep connection open
             sock = self.socket_factory()
             sock.connect((self.server, self.port))
 
@@ -46,18 +46,19 @@ class CarbonReporter(Reporter):
         for key in metrics.keys():
             for value_key in metrics[key].keys():
                 metricLine = "%s%s.%s %s %s\n" % (
-                    self.prefix, key, value_key, metrics[key][value_key], timestamp)
+                    self.prefix, key, value_key, metrics[key][value_key],
+                    timestamp)
                 metrics_data.append(metricLine)
         return ''.join(metrics_data)
 
-    
+
 class UdpCarbonReporter(CarbonReporter):
-    
+
     """
     The default CarbonReporter uses TCP.
     This sub-class uses UDP instead which might be unreliable but it is faster
     """
-    
+
     def report_now(self, registry=None, timestamp=None):
         metrics = self._collect_metrics(registry or self.registry, timestamp)
         if metrics:

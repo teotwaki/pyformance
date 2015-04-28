@@ -10,10 +10,12 @@ class ConsoleReporter(Reporter):
 
     """
     Show metrics in a human readable form.
-    This is useful for debugging if you want to read the current state on the console.
+    This is useful for debugging if you want to read the current state on the
+    console.
     """
 
-    def __init__(self, registry=None, reporting_interval=30, stream=sys.stderr, clock=None):
+    def __init__(self, registry=None, reporting_interval=30, stream=sys.stderr,
+                 clock=None):
         super(ConsoleReporter, self).__init__(
             registry, reporting_interval, clock)
         self.stream = stream

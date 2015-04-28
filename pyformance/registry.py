@@ -4,7 +4,8 @@ import functools
 import re
 import time
 import sys
-from .meters import Counter, Histogram, Meter, Timer, Gauge, CallbackGauge, SimpleGauge
+from .meters import (Counter, Histogram, Meter, Timer, Gauge, CallbackGauge,
+                     SimpleGauge)
 
 
 class MetricsRegistry(object):
@@ -15,7 +16,7 @@ class MetricsRegistry(object):
     a reference back to its service. The service would create a
     L{MetricsRegistry} to manage all of its metrics tools.
     """
-    def __init__(self, clock = time):
+    def __init__(self, clock=time):
         """
         Creates a new L{MetricsRegistry} instance.
         """
@@ -36,13 +37,12 @@ class MetricsRegistry(object):
         :type key: C{str}
         :param metric: instance of Histogram, Meter, Gauge, Timer or Counter
         """
-        class_map = (
-           (Histogram, self._histograms),
-           (Meter, self._meters),
-           (Gauge, self._gauges),
-           (Timer, self._timers),
-           (Counter, self._counters),
-        )
+        class_map = ((Histogram, self._histograms),
+                     (Meter, self._meters),
+                     (Gauge, self._gauges),
+                     (Timer, self._timers),
+                     (Counter, self._counters),
+                     )
         for cls, registry in class_map:
             if isinstance(metric, cls):
                 if key in registry:
@@ -66,7 +66,8 @@ class MetricsRegistry(object):
 
     def histogram(self, key):
         """
-        Gets a histogram based on a key, creates a new one if it does not exist.
+        Gets a histogram based on a key, creates a new one if it does not
+        exist.
 
         :param key: name of the metric
         :type key: C{str}
@@ -219,15 +220,17 @@ class MetricsRegistry(object):
 class RegexRegistry(MetricsRegistry):
 
     """
-    A single interface used to gather metrics on a service. This class uses a regex to combine
-    measures that match a pattern. For example, if you have a REST API, instead of defining
-    a timer for each method, you can use a regex to capture all API calls and group them.
-    A pattern like '^/api/(?P<model>)/\d+/(?P<verb>)?$' will group and measure the following:
+    A single interface used to gather metrics on a service. This class uses a
+    regex to combine measures that match a pattern. For example, if you have a
+    REST API, instead of defining a timer for each method, you can use a regex
+    to capture all API calls and group them.
+    A pattern like '^/api/(?P<model>)/\d+/(?P<verb>)?$' will group and measure
+    the following:
         /api/users/1 -> users
         /api/users/1/edit -> users/edit
         /api/users/2/edit -> users/edit
     """
-    def __init__(self, pattern = None, clock = time):
+    def __init__(self, pattern=None, clock=time):
         super(RegexRegistry, self).__init__(clock)
         if pattern is not None:
             self.pattern = re.compile(pattern)
@@ -294,10 +297,12 @@ def dump_metrics():
 def clear():
     return _global_registry.clear()
 
+
 def get_qualname(obj):
     if sys.version_info[0] > 2:
         return obj.__qualname__
     return obj.__name__
+
 
 def count_calls(fn):
     """
@@ -366,7 +371,6 @@ def time_calls(fn):
     @functools.wraps(fn)
     def wrapper(*args, **kwargs):
         _timer = timer("%s_calls" % get_qualname(fn))
-        with _timer.time(fn = get_qualname(fn)):
+        with _timer.time(fn=get_qualname(fn)):
             return fn(*args, **kwargs)
     return wrapper
-

@@ -17,7 +17,8 @@ class ExpWeightedMovingAvg(object):
         Create a new EWMA with a specific smoothing constant.
 
         :type period: C{int}
-        :param period: the time in minutes it takes to reach a given significance level
+        :param period: the time in minutes it takes to reach a given
+                       significance level
         :type interval: C{int}
         :param interval: the expected tick interval, defaults to 5s
         """
@@ -62,7 +63,7 @@ class ExpWeightedMovingAvg(object):
     def _alpha(self, interval):
         """
         Calculate the alpha based on the time since the last tick. This is
-        necessary because a single threaded Python program loses precision  
+        necessary because a single threaded Python program loses precision
         under high load, so we can't assume a consistant I{EWMA._interval}.
 
         :type interval: C{float}

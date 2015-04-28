@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import sys
 import os
 import datetime
 from .reporter import Reporter
@@ -13,7 +12,8 @@ class CsvReporter(Reporter):
     Each metrics gets its own file
     """
 
-    def __init__(self, registry=None, reporting_interval=30, path=None, separator="\t", clock=None):
+    def __init__(self, registry=None, reporting_interval=30, path=None,
+                 separator="\t", clock=None):
         super(CsvReporter, self).__init__(
             registry, reporting_interval, clock)
         self.path = path or os.getcwd()
@@ -39,7 +39,8 @@ class CsvReporter(Reporter):
             if f is None:
                 if not os.path.exists(target):
                     f = open(target, "w")
-                    f.write("%s\n" % self.separator.join(["timestamp"] + value_keys))
+                    f.write("%s\n" % self.separator.join(
+                        ["timestamp"] + value_keys))
                 else:
                     f = open(target, "a")
                 self.files[target] = f

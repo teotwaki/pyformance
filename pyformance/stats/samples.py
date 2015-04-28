@@ -33,8 +33,8 @@ class ExpDecayingSample(object):
         :type size: C{int}
         :param size: the number of samples to keep in the sampling reservoir
         :type alpha: C{float}
-        :param alpha: the exponential decay factor; the higher this is, the more
-                      biased the sample will be towards newer values
+        :param alpha: the exponential decay factor; the higher this is, the
+                      more biased the sample will be towards newer values
         :type clock: C{function}
         :param clock: the function used to return the current time, default to
                       seconds since the epoch; to be used with other time

@@ -8,8 +8,8 @@ from ..stats.moving_average import ExpWeightedMovingAvg
 class Meter(object):
 
     """
-    A meter metric which measures mean throughput and one-, five-, and fifteen-minute
-    exponentially-weighted moving average throughputs.
+    A meter metric which measures mean throughput and one-, five-, and
+    fifteen-minute exponentially-weighted moving average throughputs.
     """
 
     def __init__(self, clock=time):

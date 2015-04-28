@@ -18,12 +18,12 @@ else:
 class Timer(object):
 
     """
-    A timer metric which aggregates timing durations and provides duration statistics, plus
-    throughput statistics via Meter and Histogram.
-      
+    A timer metric which aggregates timing durations and provides duration
+    statistics, plus throughput statistics via Meter and Histogram.
     """
 
-    def __init__(self, threshold=None, size=DEFAULT_SIZE, alpha=DEFAULT_ALPHA, clock=time):
+    def __init__(self, threshold=None, size=DEFAULT_SIZE, alpha=DEFAULT_ALPHA,
+                 clock=time):
         super(Timer, self).__init__()
         self.meter = Meter(clock=clock)
         self.hist = Histogram(clock=clock)
@@ -85,7 +85,8 @@ class Timer(object):
     def time(self, *args, **kwargs):
         """
         Parameters will be sent to signal, if fired.
-        Returns a timer context instance which can be used from a with-statement.
+        Returns a timer context instance which can be used from a
+        with-statement.
         Without with-statement you have to call the stop method on the context
         """
         return TimerContext(self, self.meter.clock, *args, **kwargs)
@@ -109,7 +110,8 @@ class TimerContext(object):
     def stop(self):
         elapsed = self.clock.time() - self.start_time
         self.timer._update(elapsed)
-        if self.timer.threshold and self.timer.threshold < elapsed and call_too_long is not None:
+        if self.timer.threshold and self.timer.threshold < elapsed \
+                and call_too_long is not None:
             call_too_long.send(
                 self.timer, elapsed=elapsed, *self.args, **self.kwargs)
         return elapsed

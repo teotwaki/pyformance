@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+
 class Snapshot(object):
 
     """
@@ -43,7 +44,7 @@ class Snapshot(object):
     def get_percentile(self, percentile):
         """
         get custom percentile
-        
+
         :param percentile: float value between 0 and 1
         """
         if percentile < 0 or percentile > 1:

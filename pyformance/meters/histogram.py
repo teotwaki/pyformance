@@ -25,7 +25,7 @@ class Histogram(object):
     def add(self, value):
         """
         Add value to histogram
-        
+
         :type value: float
         """
         with self.lock:
